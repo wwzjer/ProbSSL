@@ -1,0 +1,9 @@
+# Install from ProbSSL root: pip install -r requirements.txt
+torch
+torchvision
+nibabel==3.1.1
+einops==0.4.1
+tqdm==4.59.0
+scipy
+tensorboardX==2.1
+git+https://github.com/Project-MONAI/MONAI.git@a23c7f54

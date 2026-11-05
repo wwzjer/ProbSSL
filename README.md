@@ -1,5 +1,78 @@
 # ProbSSL
 
-## Abstract
+This repository contains the official implementation of
 
-Owing to the prohibitive cost of manual annotation for enormous medical images, self-supervised learning (SSL) has gained substantial attention and shown promise in various medical imaging tasks. Among SSL approaches, contrastive learning has emerged as a prominent one, encouraging models to encode semantic information that remains invariant between different augmented views. However, this invariance can be spurious for medical images, as subtle but critical medical features can be suppressed during augmentations. In this paper, we mitigate this issue by encoding the learned feature embeddings as probability distributions rather than fixed vectors, thus capturing a richer and more nuanced spectrum of information. Furthermore, we propose a unified probabilistic framework that seamlessly integrates multiple SSL approaches. Our method achieves superior performance over the state-of-the-art SSL methods on various downstream tasks across multiple datasets, including medical image segmentation and classification. We further validate the method through additional analyses of robustness to stronger augmentations, label efficiency under limited fine-tuning labels, and computational trade-offs. The code will be released soon.
+> Wei & Yuan, *Mitigating Spurious Invariance in Contrastive Learning: A Probabilistic Self-Supervised Learning Framework for Medical Image Analysis*, IEEE Transactions on Medical Imaging, 2026.
+
+- Paper: [IEEE Xplore](https://ieeexplore.ieee.org/document/11494075) · [arXiv](https://arxiv.org/abs/2611.05734)
+- Code: [https://github.com/wwzjer/ProbSSL](https://github.com/wwzjer/ProbSSL)
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Pre-training
+
+Pre-training writes checkpoints to `pretrain/runs/probssl/`. To run pre-training:
+
+```bash
+export DATA_PATH=/path/to/pretrain_data/
+bash pretrain/pretrain.sh
+```
+
+## Downstream evaluation
+
+Each task under `downstream/` provides `finetune.sh` and `eval.sh`. Set data roots via `DATA_DIR`:
+
+```bash
+export DATA_DIR=/path/to/dataset
+bash downstream/BTCV/finetune.sh
+bash downstream/BTCV/eval.sh
+
+bash downstream/MM-WHS/finetune.sh
+bash downstream/MM-WHS/eval.sh
+
+bash downstream/CC-CCII/finetune.sh
+bash downstream/CC-CCII/eval.sh
+
+bash downstream/BraTS/finetune.sh
+bash downstream/BraTS/eval.sh
+```
+
+## Repository structure
+
+```text
+ProbSSL/
+  README.md
+  LICENSE
+  requirements.txt
+  pretrain/          # self-supervised pre-training
+  downstream/
+    BTCV/            # multi-organ CT segmentation
+    MM-WHS/          # cardiac CT segmentation
+    CC-CCII/         # COVID-19 CT classification
+    BraTS/           # brain tumor segmentation (MSD Task01)
+```
+
+## Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@article{wei2026mitigating,
+  title={Mitigating Spurious Invariance in Contrastive Learning: A Probabilistic Self-Supervised Learning Framework for Medical Image Analysis},
+  author={Wei, Wei and Yuan, Yading},
+  journal={IEEE Transactions on Medical Imaging},
+  volume={45},
+  number={7},
+  pages={3862--3877},
+  year={2026},
+  doi={10.1109/TMI.2026.3687158}
+}
+```
+
+## License
+
+This project is released under the [Apache License 2.0](LICENSE).
